@@ -402,3 +402,86 @@ html[data-theme="dark"] .ss-goal-banner{background:linear-gradient(100deg,var(--
 .page-visual-overlay{z-index:3!important;left:30px!important;bottom:28px!important;max-width:600px!important;padding:18px 20px!important}
 .page-photo-chip{position:absolute;z-index:4;right:18px;top:18px;padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(8,31,25,.72);color:#d8eee5;font:700 8px "DM Mono",monospace;letter-spacing:.13em;backdrop-filter:blur(12px)}
 @media(max-width:700px){.page-visual-band,.page-visual-main{min-height:280px!important;height:280px!important}.page-visual-overlay{left:15px!important;right:15px!important;bottom:15px!important}.page-photo-chip{right:12px;top:12px}.page-visual-main:after{background:linear-gradient(180deg,rgba(11,37,31,.08),rgba(11,37,31,.18) 42%,rgba(11,37,31,.92) 100%)!important}}
+
+/* V75.1 — product-wide visual correction */
+.ss-shell{grid-template-columns:272px minmax(0,1fr)!important;min-height:100vh}
+.ss-sidebar{width:272px!important;position:sticky;top:0;height:100vh!important;min-height:100vh!important;overflow-y:auto;z-index:20}
+.ss-side-nav .nav{display:flex!important;align-items:center!important;width:100%!important;text-align:left!important}
+.ss-side-nav .nav>span:last-child{display:block!important;visibility:visible!important;opacity:1!important;position:static!important;color:inherit!important}
+.ss-side-nav .nav>span.nav-icon{display:grid!important;visibility:visible!important}
+.ss-side-nav .nav{font-size:12px!important;letter-spacing:-.01em!important}
+.ss-side-nav .nav.active{font-weight:800!important}
+.ss-side-nav{padding-top:2px}
+.ss-side-nav:before{margin-bottom:4px}
+.ss-plus-card{margin-top:28px!important}
+.ss-stage{min-width:0!important;overflow-x:hidden}
+.app-main{min-width:0!important}
+.app-main>section{width:min(1500px,100%)!important}
+
+/* Eliminate the empty-feeling first fold: the recommended action is photographic. */
+.hero-action{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate;
+  background:
+    linear-gradient(90deg,rgba(12,48,39,.97) 0%,rgba(18,58,48,.91) 48%,rgba(18,58,48,.38) 100%),
+    url("https://images.pexels.com/photos/17668838/pexels-photo-17668838.jpeg?auto=compress&cs=tinysrgb&w=1800") center/cover no-repeat!important;
+}
+.hero-action:before{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(circle at 78% 20%,rgba(243,163,94,.18),transparent 25%);
+  pointer-events:none;
+}
+.hero-action:after{
+  z-index:-1!important;
+  border-color:rgba(255,255,255,.12)!important;
+}
+.hero-action>*{position:relative;z-index:2}
+
+/* Every secondary page gets a strong editorial image before the data cards. */
+.page-visual-band{margin-top:2px!important;margin-bottom:22px!important}
+.page-visual-main{height:390px!important;min-height:390px!important}
+.page-visual-main img{object-position:center 42%!important}
+.page-visual-main:after{background:linear-gradient(90deg,rgba(9,34,28,.95) 0%,rgba(15,51,42,.70) 42%,rgba(15,51,42,.15) 82%,rgba(15,51,42,.05) 100%)!important}
+.page-visual-overlay{max-width:680px!important;background:rgba(7,27,22,.78)!important;backdrop-filter:blur(10px)!important}
+.page-visual-overlay b{font-size:clamp(22px,2.2vw,34px)!important;line-height:1.05!important}
+.page-photo-chip{font-size:8px!important}
+
+/* Make the canvas feel like a designed studio instead of a white document. */
+.app-main{
+  background:
+    radial-gradient(circle at 92% 4%,rgba(131,211,170,.08),transparent 18%),
+    radial-gradient(circle at 2% 26%,rgba(243,163,94,.07),transparent 16%);
+}
+.head{position:relative!important;padding-top:6px!important}
+.head:after{
+  content:"";
+  position:absolute;right:0;top:0;
+  width:84px;height:4px;border-radius:999px;
+  background:linear-gradient(90deg,var(--v75-mint),var(--v75-apricot));
+}
+
+/* Public pages get a full-width visual lead rather than plain white legal layouts. */
+.legal-page{padding-top:1px}
+.ss-marketing-photo{margin-top:18px!important;min-height:360px!important}
+.ss-marketing-photo img{min-height:360px!important}
+.ss-marketing-photo-copy b{font-size:clamp(24px,3vw,38px)!important;line-height:1.02!important}
+
+/* Do not let legacy base CSS hide the product navigation again. */
+.ss-sidebar .nav span{display:block!important}
+.ss-sidebar .nav span.nav-icon{display:grid!important}
+.ss-sidebar .nav span:last-child{display:block!important}
+
+/* Tablet/mobile keep labels in the mobile nav, while the desktop sidebar disappears. */
+@media(max-width:900px){
+  .ss-sidebar{display:none!important}
+  .ss-shell{display:block!important}
+  .app-main{padding-top:20px!important}
+  .page-visual-main,.page-visual-main img{height:320px!important;min-height:320px!important}
+}
+@media(max-width:600px){
+  .page-visual-main,.page-visual-main img{height:285px!important;min-height:285px!important}
+  .page-visual-main:after{background:linear-gradient(180deg,rgba(9,34,28,.05),rgba(9,34,28,.9) 86%)!important}
+  .hero-action{min-height:360px!important;background-position:60% center!important}
+}

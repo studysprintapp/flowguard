@@ -63,8 +63,8 @@ jobs:
           test -f robots.txt
           test -f sitemap.xml
           test -f sw.js
-          grep -q "visual-v75.css?v=75" index.html
-          grep -q "studysprint-shell-v99-v75" sw.js
+          grep -q "visual-v75.css?v=75.1" index.html
+          grep -q "studysprint-shell-v100-v75.1" sw.js
 
   deploy:
     needs: validate

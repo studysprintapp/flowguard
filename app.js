@@ -50,10 +50,10 @@ function shell(c){
   const primary=[["today","Today","⌂"],["plan","My Plan","◷"],["practice","Practice","✎"],["tutor","AI Tutor","✦"],["review","Review","✓"]];
   const secondary=[["progress","Progress","↗"],["subjects","Subjects","◫"],["focus","Focus","◉"],["account","Account","S"]];
   const currentLabel=({today:"Today",plan:"My Plan",practice:"Practice",tutor:"AI Tutor",review:"Review",progress:"Progress",subjects:"Subjects",focus:"Focus",account:"Account"})[state.view]||"Today";
-  const item=([v,t,ic])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\\''+v+'\\')"><span class="studio-nav-icon">'+ic+'</span><span>'+t+'</span>'+(state.view===v?'<i class="studio-nav-active"></i>':"")+'</button>';
+  const item=([v,t,ic])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\''+v+'\')"><span class="studio-nav-icon">'+ic+'</span><span>'+t+'</span>'+(state.view===v?'<i class="studio-nav-active"></i>':"")+'</button>';
   return '<div class="studio-shell">'+
     '<aside class="studio-sidebar">'+
-      '<button class="studio-brand" onclick="view(\\'today\\')" aria-label="StudySprint home"><span class="studio-logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
+      '<button class="studio-brand" onclick="view(\'today\')" aria-label="StudySprint home"><span class="studio-logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
       '<div class="studio-nav-label">WORKSPACE</div>'+
       '<nav class="studio-nav" aria-label="StudySprint workspace">'+primary.map(item).join("")+'</nav>'+
       '<div class="studio-nav-label studio-secondary-label">INSIGHTS</div>'+
@@ -65,7 +65,7 @@ function shell(c){
     '<div class="studio-stage">'+
       '<header class="studio-topbar">'+
         '<div class="studio-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
-        '<div class="studio-top-actions"><button onclick="view(\\'tutor\\')" class="studio-search"><span>⌕</span> Search or ask Tutor</button><button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><button onclick="view(\\'account\\')" class="studio-avatar" aria-label="Open account">S</button></div>'+
+        '<div class="studio-top-actions"><button onclick="view(\'tutor\')" class="studio-search"><span>⌕</span> Search or ask Tutor</button><button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><button onclick="view(\'account\')" class="studio-avatar" aria-label="Open account">S</button></div>'+
       '</header>'+
       '<div class="studio-mobile-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
       '<main class="app-main view-'+state.view+'">'+c+'</main>'+

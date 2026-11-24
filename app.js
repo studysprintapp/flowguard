@@ -47,51 +47,43 @@ function toggleTheme(){
 }
 function nav(v,t,i){return `<button class="nav ${state.view===v?"active":""}" onclick="view('${v}')"><span>${i}</span>${t}</button>`}
 function shell(c){
-  const primary=[["today","Today","⌂"],["plan","My Plan","◷"],["practice","Practice","✎"],["tutor","AI Tutor","✦"],["review","Review","✓"]];
-  const secondary=[["progress","Progress","↗"],["subjects","Subjects","◫"],["focus","Focus","◉"],["account","Account","S"]];
+  const items=[["today","Today","⌂"],["plan","My Plan","◷"],["practice","Practice","✎"],["tutor","AI Tutor","✦"],["review","Review","✓"],["progress","Progress","↗"],["subjects","Subjects","◫"],["focus","Focus","◉"],["account","Account","S"]];
   const currentLabel=({today:"Today",plan:"My Plan",practice:"Practice",tutor:"AI Tutor",review:"Review",progress:"Progress",subjects:"Subjects",focus:"Focus",account:"Account"})[state.view]||"Today";
-  const item=([v,t,ic])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\''+v+'\')"><span class="studio-nav-icon">'+ic+'</span><span>'+t+'</span>'+(state.view===v?'<i class="studio-nav-active"></i>':"")+'</button>';
-  return '<div class="studio-shell">'+
-    '<aside class="studio-sidebar">'+
-      '<button class="studio-brand" onclick="view(\'today\')" aria-label="StudySprint home"><span class="studio-logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
-      '<div class="studio-nav-label">WORKSPACE</div>'+
-      '<nav class="studio-nav" aria-label="StudySprint workspace">'+primary.map(item).join("")+'</nav>'+
-      '<div class="studio-nav-label studio-secondary-label">INSIGHTS</div>'+
-      '<nav class="studio-nav" aria-label="StudySprint insights">'+secondary.map(item).join("")+'</nav>'+
-      '<div class="studio-side-spacer"></div>'+
-      '<div class="studio-plus"><span class="studio-plus-mark">✦</span><b>StudySprint Plus</b><p>More material, deeper practice, less busywork.</p><button onclick="openPremium()">Explore Plus <span>→</span></button></div>'+
-      '<div class="studio-sidebar-bottom"><button class="studio-theme" onclick="toggleTheme()" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><span>v76</span></div>'+
-    '</aside>'+
+  const item=([v,t,ic])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\\''+v+'\\')"><span class="studio-nav-icon">'+ic+'</span><span>'+t+'</span></button>';
+  return '<div class="studio-shell studio-shell-topnav">'+
     '<div class="studio-stage">'+
-      '<header class="studio-topbar">'+
-        '<div class="studio-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
-        '<div class="studio-top-actions"><button onclick="view(\'tutor\')" class="studio-search"><span>⌕</span> Search or ask Tutor</button><button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><button onclick="view(\'account\')" class="studio-avatar" aria-label="Open account">S</button></div>'+
+      '<header class="studio-topbar studio-topbar-main">'+
+        '<button class="studio-brand" onclick="view(\\'today\\')" aria-label="StudySprint"><span class="studio-logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
+        '<nav class="studio-nav studio-nav-top" aria-label="StudySprint workspace">'+items.map(item).join("")+'</nav>'+
+        '<div class="studio-top-actions"><button onclick="view(\\'tutor\\')" class="studio-search"><span>⌕</span><b>Search</b></button><button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><button onclick="view(\\'account\\')" class="studio-avatar" aria-label="Open account">S</button></div>'+
       '</header>'+
       '<div class="studio-mobile-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
       '<main class="app-main view-'+state.view+'">'+c+'</main>'+
       '<footer class="site-footer"><span>StudySprint · Plan → Learn → Practice → Evidence → Review → Adapt.</span><nav aria-label="Legal"><a href="./terms.html">Terms</a><a href="./privacy.html">Privacy</a><a href="./pricing.html">Pricing</a><a href="./refund.html">Refunds</a><a href="./contact.html">Support</a></nav></footer>'+
     '</div>'+
   '</div>'+
-  '<nav class="studio-mobile-nav" aria-label="StudySprint pages">'+primary.map(item).join("")+'</nav>'+
+  '<nav class="studio-mobile-nav" aria-label="StudySprint pages">'+items.slice(0,5).map(item).join("")+'</nav>'+
   '<div class="toast '+(state.toast?"show":"")+'">'+esc(state.toast)+'</div>'+ (state.modal?setup():"");
 }
 function pageHint(title,text,action=""){return '<div class="pagehint"><b>'+esc(title)+'</b><span>'+esc(text)+'</span>'+(action||'')+'</div>'}
 function pageVisual(k){
   const map={
-    PLAN:["https://images.pexels.com/photos/17668838/pexels-photo-17668838.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-plan.svg","A student planning deadlines on a desk with a laptop, calendar and study materials","Plan around what matters most."],
-    SUBJECTS:["https://images.pexels.com/photos/8199257/pexels-photo-8199257.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-subjects.svg","A focused student studying in a library surrounded by books and learning materials","See what is strong, developing and weak."],
-    SESSION:["https://images.pexels.com/photos/6267061/pexels-photo-6267061.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-session.svg","A student working at a desk with a laptop and notebook, ready for a focused session","One session. One goal. One piece of evidence."],
-    "NEXT SESSION":["https://images.pexels.com/photos/6267061/pexels-photo-6267061.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-session.svg","A student working at a desk with a laptop and notebook, ready for a focused session","One session. One goal. One piece of evidence."],
-    PRACTICE:["https://images.pexels.com/photos/6929275/pexels-photo-6929275.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-practice.svg","Close-up active study with handwritten notes, books and retrieval work","Answer first. Let the result become evidence."],
-    TUTOR:["https://images.pexels.com/photos/9159068/pexels-photo-9159068.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-tutor.svg","A student receiving focused academic guidance in a university library","Ask, explain, check — then try it yourself."],
-    REVIEW:["https://images.pexels.com/photos/6549856/pexels-photo-6549856.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-review.svg","A top-down study workspace with books, notes and a laptop for review","Review what needs another retrieval."],
-    PROGRESS:["https://images.pexels.com/photos/9572709/pexels-photo-9572709.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-progress.svg","A deep study scene surrounded by books and learning materials","Progress is evidence, not just time spent."],
-    FOCUS:["https://images.pexels.com/photos/8199770/pexels-photo-8199770.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-focus.svg","Two students working together in a bright library study space","Protect the minutes that move learning forward."],
-    ACCOUNT:["https://images.pexels.com/photos/5306450/pexels-photo-5306450.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/v69-account.svg","Students collaborating around a laptop with notebooks and books","Keep your system organised and yours."]
+    PLAN:["https://images.pexels.com/photos/17668838/pexels-photo-17668838.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/plan-visual.svg","A student planning a study schedule with notes and a laptop","Build the week around the work that matters."],
+    PRACTICE:["https://images.pexels.com/photos/6929275/pexels-photo-6929275.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/practice-visual.svg","A focused student working through handwritten study notes","Answer first. Turn the result into evidence."],
+    TUTOR:["https://images.pexels.com/photos/9159068/pexels-photo-9159068.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/tutor-visual.svg","A student getting focused academic guidance","Ask, understand, then prove it yourself."],
+    REVIEW:["https://images.pexels.com/photos/6549856/pexels-photo-6549856.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/review-visual.svg","A study workspace prepared for reviewing notes and mistakes","Return to the things that still need retrieval."],
+    PROGRESS:["https://images.pexels.com/photos/9572709/pexels-photo-9572709.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/progress-visual.svg","A deep study workspace with books and learning materials","See evidence of learning, not just hours."],
+    SUBJECTS:["https://images.pexels.com/photos/8199257/pexels-photo-8199257.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/subjects-visual.svg","A student studying in a library with a laptop","See the whole learning map at a glance."],
+    FOCUS:["https://images.pexels.com/photos/8199770/pexels-photo-8199770.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/focus-visual.svg","Students working together in a bright study space","Protect the minutes that move learning forward."],
+    ACCOUNT:["https://images.pexels.com/photos/5306450/pexels-photo-5306450.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/account-visual.svg","Students collaborating around a laptop and notebooks","Keep your learning system organised and yours."]
   };
   const v=map[String(k).toUpperCase()];
   if(!v)return "";
-  return '<div class="page-visual-band"><div class="page-visual-main"><img src="'+v[0]+'" alt="'+v[2]+'" loading="lazy" width="1800" height="1100" onerror="this.onerror=null;this.src=\''+v[1]+'\'"><div class="page-visual-scrim"></div><div class="page-visual-overlay"><span class="page-visual-label">STUDYSPRINT · '+esc(String(k).toUpperCase())+'</span><b>'+esc(v[3])+'</b></div><span class="page-photo-chip">STUDY IN REAL LIFE</span></div></div>';
+  return '<div class="page-visual-band page-visual-'+String(k).toLowerCase().replace(/[^a-z0-9]+/g,"-")+'">'+
+    '<div class="page-visual-photo"><img src="'+v[0]+'" alt="'+v[2]+'" loading="lazy" width="1800" height="1100" onerror="this.onerror=null;this.src=\''+v[1]+'\'"><div class="page-visual-scrim"></div></div>'+
+    '<div class="page-visual-content"><span class="page-visual-label">STUDYSPRINT · '+esc(String(k).toUpperCase())+'</span><h2>'+esc(v[3])+'</h2><div class="page-visual-meta"><span>ADAPTIVE LEARNING</span><span>ACTIVE RECALL</span><span>REAL EVIDENCE</span></div></div>'+
+    '<div class="page-visual-art"><img src="'+v[1]+'" alt="" loading="lazy" width="900" height="650" aria-hidden="true"></div>'+
+  '</div>';
 }
 function head(k,t,p,a=""){
   return '<div class="head"><div class="head-copy"><div class="kicker">'+esc(k)+'</div><h1>'+t+'</h1><p>'+p+'</p></div><div class="head-side">'+(a||"")+'</div></div>'+pageVisual(k);

@@ -108,4 +108,3 @@ assert.match(v75,/studio-shell/);
 assert.match(v75,/studio-nav-item/);
 assert.match(v75,/app-main\{width:100%!important/);
 assert.match(marketing,/ss-marketing-photo/);
-\n

@@ -96,12 +96,46 @@ function pageVisual(k){
   if(!v)return "";
   return '<div class="page-visual-band page-visual-'+String(k).toLowerCase().replace(/[^a-z0-9]+/g,"-")+'">'+
     '<div class="page-visual-photo"><img src="'+v[0]+'" alt="'+v[2]+'" loading="lazy" width="1800" height="1100" onerror="this.onerror=null;this.src=\''+v[1]+'\'"><div class="page-visual-scrim"></div></div>'+
-    '<div class="page-visual-content"><span class="page-visual-label">STUDYSPRINT · '+esc(String(k).toUpperCase())+'</span><h2>'+esc(v[3])+'</h2><div class="page-visual-meta"><span>ADAPTIVE LEARNING</span><span>ACTIVE RECALL</span><span>REAL EVIDENCE</span></div></div>'+
+    '<div class="page-visual-content"><div class="page-visual-topline"><span class="page-visual-label">STUDYSPRINT · '+esc(String(k).toUpperCase())+'</span><span class="page-visual-status"><i></i> LEARNING SYSTEM</span></div><h2>'+esc(v[3])+'</h2><p class="page-visual-deck">'+({
+  PLAN:"Your schedule is a living roadmap. Change the inputs and the next best work changes with them.",
+  PRACTICE:"Answer first, see the evidence, then let mistakes and confidence shape what comes back.",
+  TUTOR:"Use your material and your questions as context. The goal is understanding you can retrieve later.",
+  REVIEW:"Bring weak topics, saved mistakes and due Study Packs back into the learning loop.",
+  PROGRESS:"Readiness is more than minutes. Combine confidence, practice accuracy, plan coverage and review health.",
+  SUBJECTS:"Keep your course map clear enough that every practice result has somewhere useful to land.",
+  FOCUS:"Protect a short block of attention, then leave the timer with evidence that the work actually moved.",
+  ACCOUNT:"Keep your study system organised: inputs, evidence, plan status and the controls that shape your experience."
+}[String(k).toUpperCase()]||"A focused workspace for the next useful learning move.")+'</p><div class="page-visual-meta"><span>ADAPTIVE LEARNING</span><span>ACTIVE RECALL</span><span>REAL EVIDENCE</span></div></div>'+
     '<div class="page-visual-art"><img src="'+v[1]+'" alt="" loading="lazy" width="900" height="650" aria-hidden="true"></div>'+
   '</div>';
 }
+function pageTools(k){
+  const map={
+    PLAN:[["Rebuild","regen()"],["Practice","view('practice')"],["Focus","view('focus')"]],
+    PRACTICE:[["Change subject","practiceHome()"],["AI Tutor","view('tutor')"],["Review","view('review')"]],
+    TUTOR:[["Study pack","studyPack()"],["Quiz me","tutorPrompt('Quiz me')"],["Practice","view('practice')"]],
+    REVIEW:[["Practice","view('practice')"],["AI Tutor","view('tutor')"],["Progress","view('progress')"]],
+    PROGRESS:[["Practice weak spots","view('practice')"],["Subjects","view('subjects')"],["Review","view('review')"]],
+    SUBJECTS:[["Edit subjects","openSetup()"],["Practice","view('practice')"],["Progress","view('progress')"]],
+    FOCUS:[["Start 25 min","timerSet(25)"],["Practice","view('practice')"],["Today","view('today')"]],
+    ACCOUNT:[["Edit plan","openSetup()"],["Plus","openPremium()"],["Support","location.href='./contact.html'"]],
+    SESSION:[["Explain","tutorForTask('Explain simply')"],["Practice","tutorForTask('Practice')"],["Focus","startFocusForTask()"]]
+  };
+  const items=map[String(k).toUpperCase()]||[];
+  return items.length?'<div class="page-tool-rail">'+items.map((x,i)=>'<button class="page-tool '+(i===0?'primary-tool':'')+'" onclick="'+x[1]+'"><span class="page-tool-num">0'+(i+1)+'</span><span><b>'+esc(x[0])+'</b><small>'+({
+    PLAN:["Adjust the roadmap","Test the next topic","Protect a focus block"],
+    PRACTICE:["Switch your subject","Get an explanation","Return to weak spots"],
+    TUTOR:["Turn material into recall","Answer first","Open answer-first practice"],
+    REVIEW:["Attack a weak spot","Ask for clarity","See learning evidence"],
+    PROGRESS:["Use your weakest signal","Map your topics","Return to scheduled review"],
+    SUBJECTS:["Change your learning map","Turn topics into questions","See evidence"],
+    FOCUS:["Start a protected block","Test yourself","Return to command center"],
+    ACCOUNT:["Change your learning inputs","See your plan","Get product support"],
+    SESSION:["Learn the idea","Prove it","Protect the session"]
+  }[String(k).toUpperCase()]||[])[i]+'</small></span><i>↗</i></button>').join('')+'</div>':'';
+}
 function head(k,t,p,a=""){
-  return '<div class="head"><div class="head-copy"><div class="kicker">'+esc(k)+'</div><h1>'+t+'</h1><p>'+p+'</p></div><div class="head-side">'+(a||"")+'</div></div>'+pageVisual(k);
+  return '<div class="head"><div class="head-copy"><div class="kicker">'+esc(k)+'</div><h1>'+t+'</h1><p>'+p+'</p></div><div class="head-side">'+(a||"")+'</div></div>'+pageVisual(k)+pageTools(k);
 }
 function onboardingPage(){
   return '<section class="landing49">'+
@@ -205,7 +239,7 @@ function todayPage(){
       (next.map(x=>'<button class="next-item" onclick="startTask(\''+x.id+'\',\''+x.date+'\')"><span class="next-index">→</span><span><b>'+esc(x.topic)+'</b><small>'+esc(x.subject)+' · '+date(x.date)+' · '+x.minutes+'m</small></span></button>').join("")||'<div class="empty">Nothing waiting.</div>')+
       '</div>'+
     '</div>'+
-    '<div class="ss-quick-actions"><div class="ss-section-label">⚡ Quick Actions</div><button onclick="view(\'practice\')"><b>ϟ</b><span>Practice Questions</span></button><button onclick="view(\'tutor\')"><b>✦</b><span>Get AI Tutor</span></button><button onclick="view(\'review\')"><b>↻</b><span>Review Mistakes</span></button><button onclick="view(\'progress\')"><b>▥</b><span>View Progress</span></button></div>'+packCard+
+    '<div class="ss-quick-actions"><div class="ss-section-label"><span class="quick-pulse"></span> Quick Actions</div><button onclick="view(\'practice\')"><b>ϟ</b><span>Practice Questions</span></button><button onclick="view(\'tutor\')"><b>✦</b><span>Get AI Tutor</span></button><button onclick="view(\'review\')"><b>↻</b><span>Review Mistakes</span></button><button onclick="view(\'progress\')"><b>▥</b><span>View Progress</span></button></div>'+packCard+
   '</section>'+pageQuote("Turn weak topics into the next useful action.");
 
 }

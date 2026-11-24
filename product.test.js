@@ -38,7 +38,7 @@ assert.doesNotMatch(app,/— Helen Hayes/);
 assert.ok(index.includes("visual-v74.css?v=74"));
 assert.ok(index.includes("visual-v75.css?v=77"));
 assert.ok(index.includes("marketing-v75.css?v=75"));
-assert.ok(index.includes("app.js?v=76"));
+assert.ok(index.includes("app.js?v=77"));
 assert.ok(index.includes("visual-v73.css?v=73"));
 
 assert.ok(index.includes('theme-color" content="#163a33"'));
@@ -48,7 +48,7 @@ assert.doesNotMatch(index,/design-v2\.js|design-v3\.js|visual-upgrade\.js|design
 
 assert.ok(sw.includes("studysprint-shell-v104-v77"));
 assert.ok(sw.includes("marketing-v75.css?v=75"));
-assert.ok(sw.includes("app.js?v=76"));
+assert.ok(sw.includes("app.js?v=77"));
 assert.ok(sw.includes("visual-v73.css?v=73"));
 
 assert.ok(sw.includes("assets/study-hero.svg"));

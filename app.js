@@ -47,38 +47,32 @@ function toggleTheme(){
 }
 function nav(v,t,i){return `<button class="nav ${state.view===v?"active":""}" onclick="view('${v}')"><span>${i}</span>${t}</button>`}
 function shell(c){
-  const primary=[["today","Today"],["plan","Plan"],["practice","Practice"],["tutor","Tutor"],["review","Review"]];
+  const primary=[["today","Today","⌂"],["plan","My Plan","◷"],["practice","Practice","✎"],["tutor","AI Tutor","✦"],["review","Review","✓"]];
+  const secondary=[["progress","Progress","↗"],["subjects","Subjects","◫"],["focus","Focus","◉"],["account","Account","S"]];
   const currentLabel=({today:"Today",plan:"My Plan",practice:"Practice",tutor:"AI Tutor",review:"Review",progress:"Progress",subjects:"Subjects",focus:"Focus",account:"Account"})[state.view]||"Today";
-  const navItem=([v,t])=>'<button class="'+(state.view===v?"active":"")+'" onclick="view(\''+v+'\')">'+t+'</button>';
-  return '<div class="ss-shell">'+
-    '<aside class="ss-sidebar">'+
-      '<button class="brand ss-sidebar-brand" onclick="view(\'today\')" aria-label="StudySprint"><span class="logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span class="brand-copy"><b>StudySprint</b></span></button>'+
-      '<nav class="ss-side-nav" aria-label="StudySprint pages">'+
-        primary.map(([v,t])=>'<button class="nav '+(state.view===v?"active":"")+'" onclick="view(\''+v+'\')"><span class="nav-icon">'+({today:"⌂",plan:"◷",practice:"✎",tutor:"✦",review:"✓"}[v])+'</span><span>'+t+'</span></button>').join("")+
-        '<button class="nav '+(state.view==="progress"?"active":"")+'" onclick="view(\'progress\')"><span class="nav-icon">↗</span><span>Progress</span></button>'+
-        '<button class="nav '+(state.view==="subjects"?"active":"")+'" onclick="view(\'subjects\')"><span class="nav-icon">◫</span><span>Subjects</span></button>'+
-        '<button class="nav '+(state.view==="focus"?"active":"")+'" onclick="view(\'focus\')"><span class="nav-icon">◉</span><span>Focus</span></button>'+
-        '<button class="nav '+(state.view==="account"?"active":"")+'" onclick="view(\'account\')"><span class="nav-icon">S</span><span>Account</span></button>'+
-      '</nav>'+
-      '<div class="ss-plus-card"><div class="ss-plus-icon">✦</div><b>StudySprint Plus</b><span>Unlock your full learning potential.</span><button onclick="openPremium()">Go Plus <span>→</span></button></div>'+
-      '<div class="ss-side-footer"><button class="ss-theme" onclick="toggleTheme()" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><span class="theme-sun">☀</span><i><b></b></i><span class="theme-moon">☾</span></button></div>'+
+  const item=([v,t,ic])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\\''+v+'\\')"><span class="studio-nav-icon">'+ic+'</span><span>'+t+'</span>'+(state.view===v?'<i class="studio-nav-active"></i>':"")+'</button>';
+  return '<div class="studio-shell">'+
+    '<aside class="studio-sidebar">'+
+      '<button class="studio-brand" onclick="view(\\'today\\')" aria-label="StudySprint home"><span class="studio-logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
+      '<div class="studio-nav-label">WORKSPACE</div>'+
+      '<nav class="studio-nav" aria-label="StudySprint workspace">'+primary.map(item).join("")+'</nav>'+
+      '<div class="studio-nav-label studio-secondary-label">INSIGHTS</div>'+
+      '<nav class="studio-nav" aria-label="StudySprint insights">'+secondary.map(item).join("")+'</nav>'+
+      '<div class="studio-side-spacer"></div>'+
+      '<div class="studio-plus"><span class="studio-plus-mark">✦</span><b>StudySprint Plus</b><p>More material, deeper practice, less busywork.</p><button onclick="openPremium()">Explore Plus <span>→</span></button></div>'+
+      '<div class="studio-sidebar-bottom"><button class="studio-theme" onclick="toggleTheme()" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><span>v76</span></div>'+
     '</aside>'+
-    '<div class="ss-stage">'+
-      '<header class="appbar">'+
-        '<button class="appbar-brand" onclick="view(\'today\')" aria-label="StudySprint"><span class="appbar-brand-mark"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
-        '<nav class="appbar-nav" aria-label="Primary study tools">'+primary.map(navItem).join("")+'</nav>'+
-        '<div class="topright">'+
-          '<button class="appbar-action appbar-search" onclick="view(\'tutor\')" aria-label="Open Tutor"><span>⌕</span><span>Search</span></button>'+
-          '<button class="appbar-action appbar-theme" onclick="toggleTheme()" aria-label="Toggle light and dark mode"><span>☀</span><i></i><span>☾</span></button>'+
-          '<button class="appbar-action appbar-account" onclick="view(\'account\')" aria-label="Open account"><span>S</span></button>'+
-        '</div>'+
+    '<div class="studio-stage">'+
+      '<header class="studio-topbar">'+
+        '<div class="studio-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
+        '<div class="studio-top-actions"><button onclick="view(\\'tutor\\')" class="studio-search"><span>⌕</span> Search or ask Tutor</button><button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><button onclick="view(\\'account\\')" class="studio-avatar" aria-label="Open account">S</button></div>'+
       '</header>'+
-      '<div class="mobile-page-label"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
+      '<div class="studio-mobile-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
       '<main class="app-main view-'+state.view+'">'+c+'</main>'+
       '<footer class="site-footer"><span>StudySprint · Plan → Learn → Practice → Evidence → Review → Adapt.</span><nav aria-label="Legal"><a href="./terms.html">Terms</a><a href="./privacy.html">Privacy</a><a href="./pricing.html">Pricing</a><a href="./refund.html">Refunds</a><a href="./contact.html">Support</a></nav></footer>'+
     '</div>'+
   '</div>'+
-  '<nav class="mobile-nav" aria-label="StudySprint pages">'+primary.map(([v,t])=>'<button class="nav '+(state.view===v?"active":"")+'" onclick="view(\''+v+'\')"><span class="nav-icon">'+({today:"⌂",plan:"◷",practice:"✎",tutor:"✦",review:"✓"}[v])+'</span><span>'+t+'</span></button>').join("")+'</nav>'+
+  '<nav class="studio-mobile-nav" aria-label="StudySprint pages">'+primary.map(item).join("")+'</nav>'+
   '<div class="toast '+(state.toast?"show":"")+'">'+esc(state.toast)+'</div>'+ (state.modal?setup():"");
 }
 function pageHint(title,text,action=""){return '<div class="pagehint"><b>'+esc(title)+'</b><span>'+esc(text)+'</span>'+(action||'')+'</div>'}

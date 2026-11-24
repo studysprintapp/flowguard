@@ -36,7 +36,7 @@ assert.doesNotMatch(app,/— James Clear/);
 assert.doesNotMatch(app,/— Helen Hayes/);
 
 assert.ok(index.includes("visual-v74.css?v=74"));
-assert.ok(index.includes("visual-v75.css?v=76"));
+assert.ok(index.includes("visual-v75.css?v=76.1"));
 assert.ok(index.includes("marketing-v75.css?v=75"));
 assert.ok(index.includes("app.js?v=76"));
 assert.ok(index.includes("visual-v73.css?v=73"));
@@ -46,7 +46,7 @@ assert.doesNotMatch(index,/visual-v49\.css|visual-v50\.css|visual-v51\.css|visua
 assert.doesNotMatch(index,/visual-v45\.js|visual-v34\.js|visual-v41\.js|visual-v43\.js|visual-v44\.js/);
 assert.doesNotMatch(index,/design-v2\.js|design-v3\.js|visual-upgrade\.js|design-v2\.css|design-v3\.css|visual-upgrade\.css/);
 
-assert.ok(sw.includes("studysprint-shell-v102-v76"));
+assert.ok(sw.includes("studysprint-shell-v103-v76.1"));
 assert.ok(sw.includes("marketing-v75.css?v=75"));
 assert.ok(sw.includes("app.js?v=76"));
 assert.ok(sw.includes("visual-v73.css?v=73"));
@@ -108,3 +108,4 @@ assert.match(v75,/studio-shell/);
 assert.match(v75,/studio-nav-item/);
 assert.match(v75,/app-main\{width:100%!important/);
 assert.match(marketing,/ss-marketing-photo/);
+\n

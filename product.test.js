@@ -99,7 +99,7 @@ assert.match(app,/toggleTheme/);
 assert.match(app,/applyTheme\(currentTheme\(\)/);
 assert.match(app,/function openTutorSearch\(\)/);
 assert.match(app,/function showNotifications\(\)/);
-assert.match(app,/ss-goal-banner/);
+assert.match(app,/today-simple/);
 assert.match(app,/ss-quick-actions/);
 
 console.log("StudySprint product integration tests: PASS");

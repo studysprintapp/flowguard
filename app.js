@@ -47,15 +47,30 @@ function toggleTheme(){
 }
 function nav(v,t,i){return `<button class="nav ${state.view===v?"active":""}" onclick="view('${v}')"><span>${i}</span>${t}</button>`}
 function shell(c){
-  const items=[["today","Today","⌂"],["plan","My Plan","◷"],["practice","Practice","✎"],["tutor","AI Tutor","✦"],["review","Review","✓"],["progress","Progress","↗"],["subjects","Subjects","◫"],["focus","Focus","◉"],["account","Account","S"]];
+  const icons={
+    today:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9.5 20v-5h5v5"/></svg>',
+    plan:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M8 17h5"/></svg>',
+    practice:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h3l9.8-9.8a2.1 2.1 0 0 0-3-3L5 16v3Z"/><path d="m13.5 7.5 3 3M14 19h5"/></svg>',
+    tutor:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 14 9l6 2-6 2-2 6-2-6-6-2 6-2 2-6Z"/></svg>',
+    review:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-9"/><circle cx="12" cy="12" r="9"/></svg>',
+    progress:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9M12 19V5M19 19v-7"/><path d="M3 19h18"/></svg>',
+    subjects:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h6v7H5zM13 4h6v7h-6zM5 13h6v7H5zM13 13h6v7h-6z"/></svg>',
+    focus:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>',
+    account:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.2 3.1-5 7-5s6.2 1.8 7 5"/></svg>'
+  };
+  const items=[["today","Today"],["plan","My Plan"],["practice","Practice"],["tutor","AI Tutor"],["review","Review"],["progress","Progress"],["subjects","Subjects"],["focus","Focus"],["account","Account"]];
   const currentLabel=({today:"Today",plan:"My Plan",practice:"Practice",tutor:"AI Tutor",review:"Review",progress:"Progress",subjects:"Subjects",focus:"Focus",account:"Account"})[state.view]||"Today";
-  const item=([v,t,ic])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\&quot;'+v+'\&quot;)"><span class="studio-nav-icon">'+ic+'</span><span>'+t+'</span></button>';
+  const item=([v,t])=>'<button class="studio-nav-item '+(state.view===v?"active":"")+'" onclick="view(\&quot;'+v+'\&quot;)" aria-current="'+(state.view===v?"page":"false")+'"><span class="studio-nav-icon">'+icons[v]+'</span><span>'+t+'</span></button>';
   return '<div class="studio-shell studio-shell-topnav">'+
     '<div class="studio-stage">'+
       '<header class="studio-topbar studio-topbar-main">'+
-        '<button class="studio-brand" onclick="view(\&quot;today\&quot;)" aria-label="StudySprint"><span class="studio-logo"><img src="./assets/studysprint-mark.svg" alt="" aria-hidden="true"></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
+        '<button class="studio-brand" onclick="view(\&quot;today\&quot;)" aria-label="StudySprint home"><span class="studio-logo"><span class="studio-logo-s">S</span><i></i></span><span><b>StudySprint</b><small>ADAPTIVE LEARNING</small></span></button>'+
         '<nav class="studio-nav studio-nav-top" aria-label="StudySprint workspace">'+items.map(item).join("")+'</nav>'+
-        '<div class="studio-top-actions"><button onclick="view(\&quot;tutor\&quot;)" class="studio-search"><span>⌕</span><b>Search</b></button><button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode"><span>☼</span><i><b></b></i><span>☾</span></button><button onclick="view(\&quot;account\&quot;)" class="studio-avatar" aria-label="Open account">S</button></div>'+
+        '<div class="studio-top-actions">'+
+          '<button onclick="view(\&quot;tutor\&quot;)" class="studio-search" aria-label="Open AI Tutor search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><b>Search</b></button>'+
+          '<button onclick="toggleTheme()" class="studio-theme studio-theme-top" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="theme-track"><i></i></span><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg></button>'+
+          '<button onclick="view(\&quot;account\&quot;)" class="studio-avatar" aria-label="Open account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5 20c.8-3.1 3.1-4.8 7-4.8s6.2 1.7 7 4.8"/></svg></button>'+
+        '</div>'+
       '</header>'+
       '<div class="studio-mobile-context"><span>STUDYSPRINT</span><b>'+esc(currentLabel)+'</b></div>'+
       '<main class="app-main view-'+state.view+'">'+c+'</main>'+

@@ -1,0 +1,276 @@
+/* StudySprint V78 — top navigation polish + visual system cleanup
+   Based on the supplied V77 desktop screenshot and fresh competitor research.
+*/
+.studio-topbar-main .studio-nav-top{
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  overflow:visible!important;
+  justify-content:center!important;
+  align-items:center!important;
+  height:100%!important;
+}
+.studio-topbar-main{
+  grid-template-columns:196px minmax(0,1fr) auto!important;
+  min-width:0!important;
+}
+.studio-topbar-main .studio-brand{
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  height:48px!important;
+}
+.studio-logo{
+  position:relative!important;
+  width:38px!important;
+  height:38px!important;
+  flex:0 0 38px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:12px!important;
+  background:linear-gradient(145deg,#173b34,#245f4d)!important;
+  box-shadow:0 8px 18px rgba(23,59,52,.18)!important;
+  overflow:hidden!important;
+}
+.studio-logo img{display:none!important}
+.studio-logo-s{
+  display:block!important;
+  color:#fffdf8!important;
+  font:800 21px/1 "Space Grotesk",sans-serif!important;
+  letter-spacing:-.08em!important;
+  transform:translateY(-1px)!important;
+}
+.studio-logo i{
+  position:absolute!important;
+  width:6px!important;
+  height:6px!important;
+  right:7px!important;
+  bottom:7px!important;
+  border-radius:50%!important;
+  background:#f1a15e!important;
+  box-shadow:0 0 0 3px rgba(241,161,94,.14)!important;
+}
+.studio-brand>b,.studio-brand span>b{color:#173b34!important}
+.studio-brand small{color:#78958c!important}
+.studio-nav-top .studio-nav-item{
+  position:relative!important;
+  flex:0 0 auto!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0 10px!important;
+  border-radius:11px!important;
+  color:#61756d!important;
+  font:700 10px/1 "DM Sans",sans-serif!important;
+  letter-spacing:-.01em!important;
+}
+.studio-nav-top .studio-nav-item.active{
+  background:#e7f3ec!important;
+  color:#173b34!important;
+  box-shadow:inset 0 0 0 1px rgba(31,115,92,.08)!important;
+}
+.studio-nav-top .studio-nav-item.active:after{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  bottom:5px!important;
+  width:4px!important;
+  height:4px!important;
+  border-radius:50%!important;
+  background:#f1a15e!important;
+  transform:translateX(-50%)!important;
+}
+.studio-nav-top .studio-nav-item:hover{
+  background:#f1f6f3!important;
+  color:#173b34!important;
+}
+.studio-top-actions{gap:7px!important}
+.studio-search{
+  min-width:96px!important;
+  height:40px!important;
+  justify-content:center!important;
+  border-radius:12px!important;
+  background:#fffdf8!important;
+  box-shadow:0 5px 16px rgba(23,59,52,.05)!important;
+}
+.studio-search svg{
+  width:16px!important;
+  height:16px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.8!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.studio-theme-top{
+  width:88px!important;
+  height:40px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  padding:0 9px!important;
+  color:#657a72!important;
+}
+.studio-theme-top svg{
+  width:13px!important;
+  height:13px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.8!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.studio-theme-top .theme-track{
+  position:relative!important;
+  width:28px!important;
+  height:16px!important;
+  flex:0 0 28px!important;
+  border-radius:999px!important;
+  background:#dfe8e2!important;
+  padding:2px!important;
+}
+.studio-theme-top .theme-track i{
+  display:block!important;
+  width:12px!important;
+  height:12px!important;
+  border-radius:50%!important;
+  background:#173b34!important;
+  transform:none!important;
+  transition:transform .2s ease,background .2s ease!important;
+}
+html[data-theme="dark"] .studio-theme-top{
+  background:#17352d!important;
+  color:#cfe3db!important;
+}
+html[data-theme="dark"] .studio-theme-top .theme-track{background:#3b6256!important}
+html[data-theme="dark"] .studio-theme-top .theme-track i{
+  transform:translateX(12px)!important;
+  background:#9bd8b7!important;
+}
+.studio-avatar{
+  width:40px!important;
+  height:40px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:12px!important;
+  background:#173b34!important;
+  box-shadow:0 8px 18px rgba(23,59,52,.14)!important;
+}
+.studio-avatar svg{
+  width:19px!important;
+  height:19px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.8!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+html[data-theme="dark"] .studio-avatar{background:#9bd8b7!important;color:#12352c!important}
+
+/* The content starts directly under the navigation; no phantom top gap. */
+.studio-shell-topnav .app-main{
+  padding-top:24px!important;
+}
+.studio-shell-topnav .app-main>section{max-width:1480px!important}
+.studio-shell-topnav .today-photo-hero{
+  min-height:360px!important;
+  margin-bottom:18px!important;
+  border-radius:26px!important;
+  box-shadow:0 24px 60px rgba(23,59,52,.14)!important;
+}
+.studio-shell-topnav .today-photo-overlay{
+  max-width:760px!important;
+  padding:34px!important;
+}
+.studio-shell-topnav .today-photo-overlay h2{
+  max-width:720px!important;
+  font-size:clamp(38px,4.2vw,62px)!important;
+  letter-spacing:-.055em!important;
+}
+.studio-shell-topnav .ss-greeting{
+  margin:0 0 16px!important;
+}
+.studio-shell-topnav .ss-greeting h1{
+  max-width:980px!important;
+}
+.studio-shell-topnav .command-grid{gap:16px!important}
+.studio-shell-topnav .hero-action,
+.studio-shell-topnav .signal-panel{min-height:310px!important}
+.studio-shell-topnav .command-strip{margin-top:14px!important}
+.studio-shell-topnav .today-visual-story{margin-top:16px!important}
+
+/* Secondary pages: consistent, editorial hero + functional surface. */
+.studio-shell-topnav .head{margin-bottom:18px!important}
+.studio-shell-topnav .page-visual-band{
+  min-height:330px!important;
+  margin-bottom:20px!important;
+}
+.studio-shell-topnav .page-visual-content{padding:34px!important}
+.studio-shell-topnav .page-visual-art{
+  width:280px!important;
+  height:225px!important;
+}
+.studio-shell-topnav .card,
+.studio-shell-topnav .stats>div{
+  box-shadow:0 12px 34px rgba(23,59,52,.07)!important;
+}
+
+/* Dark mode parity for the new controls. */
+html[data-theme="dark"] .studio-shell-topnav,
+html[data-theme="dark"] .studio-shell-topnav .studio-stage{background:#081410!important}
+html[data-theme="dark"] .studio-topbar-main{background:rgba(10,27,22,.97)!important;border-bottom-color:#27453b!important}
+html[data-theme="dark"] .studio-brand>b,
+html[data-theme="dark"] .studio-brand span>b{color:#eef7f2!important}
+html[data-theme="dark"] .studio-brand small{color:#7fa195!important}
+html[data-theme="dark"] .studio-nav-top .studio-nav-item{color:#92aaa0!important}
+html[data-theme="dark"] .studio-nav-top .studio-nav-item:hover{background:#17352d!important;color:#f1f8f4!important}
+html[data-theme="dark"] .studio-nav-top .studio-nav-item.active{background:#1b3c32!important;color:#eff8f3!important}
+html[data-theme="dark"] .studio-search{background:#12261f!important;border-color:#2b493f!important;color:#c7ddd4!important}
+html[data-theme="dark"] .studio-search:hover{background:#18332a!important}
+html[data-theme="dark"] .studio-shell-topnav .app-main{
+  background:radial-gradient(circle at 94% 3%,rgba(79,184,145,.10),transparent 20%),#081410!important;
+}
+html[data-theme="dark"] .studio-shell-topnav .card,
+html[data-theme="dark"] .studio-shell-topnav .stats>div{background:#10231c!important;border-color:#29473d!important}
+html[data-theme="dark"] .studio-shell-topnav .head-copy h1{color:#eef7f2!important}
+html[data-theme="dark"] .studio-shell-topnav .head-copy p{color:#a9c2b8!important}
+
+/* Responsive: keep the top navigation clean without collapsing into a vertical stack. */
+@media(max-width:1180px) and (min-width:761px){
+  .studio-topbar-main{
+    grid-template-columns:176px minmax(0,1fr) auto!important;
+    gap:10px!important;
+    padding:0 16px!important;
+  }
+  .studio-nav-top{gap:1px!important}
+  .studio-nav-top .studio-nav-item{padding:0 7px!important;font-size:9px!important}
+  .studio-search{min-width:74px!important}
+  .studio-theme-top{width:74px!important}
+}
+@media(max-width:920px) and (min-width:761px){
+  .studio-brand span:not(.studio-logo){display:none!important}
+  .studio-topbar-main{grid-template-columns:48px minmax(0,1fr) auto!important}
+  .studio-nav-top .studio-nav-item{padding:0 5px!important;font-size:8px!important}
+}
+@media(max-width:760px){
+  .studio-topbar-main{
+    display:flex!important;
+    height:64px!important;
+    padding:0 13px!important;
+    gap:10px!important;
+  }
+  .studio-topbar-main .studio-brand{flex:0 0 auto!important}
+  .studio-brand span:not(.studio-logo){display:block!important}
+  .studio-brand b{font-size:14px!important}
+  .studio-brand small{display:none!important}
+  .studio-nav-top{display:none!important}
+  .studio-top-actions{margin-left:auto!important}
+  .studio-search{min-width:40px!important;width:40px!important;padding:0!important}
+  .studio-search b{display:none!important}
+  .studio-theme-top{display:flex!important;width:40px!important;padding:0!important}
+  .studio-theme-top .theme-sun,.studio-theme-top .theme-moon{display:none!important}
+  .studio-avatar{width:40px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .studio-nav-top .studio-nav-item{transition:none!important}
+  .studio-theme-top .theme-track i{transition:none!important}
+}

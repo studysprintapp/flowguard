@@ -47,6 +47,7 @@ jobs:
           test -f visual-v72.css
           test -f visual-v73.css
           test -f visual-v75.css
+          test -f visual-v78.css
           test -f marketing-v75.css
           test -f assets/adaptive-learning-system.svg
           test -f assets/study-hero.svg
@@ -64,7 +65,8 @@ jobs:
           test -f sitemap.xml
           test -f sw.js
           grep -q "visual-v75.css?v=77" index.html
-          grep -q "studysprint-shell-v104-v77" sw.js
+          grep -q "visual-v78.css?v=78" index.html
+          grep -q "studysprint-shell-v105-v78" sw.js
 
   deploy:
     needs: validate

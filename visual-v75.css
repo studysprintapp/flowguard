@@ -632,3 +632,101 @@ html[data-theme="dark"] .studio-mobile-nav{background:rgba(7,25,21,.97)!importan
 .studio-theme i b{transition:transform .2s ease!important}
 html[data-theme="dark"] .studio-theme i{background:#9bd8b7!important}
 html[data-theme="dark"] .studio-theme i b{transform:translateX(12px)!important}
+
+/* V77 — top navigation + page-by-page visual studio */
+.studio-shell-topnav{display:block!important;min-height:100vh!important;background:#f2f5f1!important}
+.studio-shell-topnav .studio-stage{min-height:100vh!important;background:#f2f5f1!important}
+.studio-topbar-main{position:sticky!important;top:0!important;height:78px!important;padding:0 26px!important;display:grid!important;grid-template-columns:190px minmax(0,1fr) auto!important;gap:18px!important;align-items:center!important;background:rgba(255,253,248,.97)!important;border-bottom:1px solid #dce4de!important;box-shadow:0 6px 25px rgba(23,59,52,.05)!important;z-index:100!important}
+.studio-topbar-main .studio-brand{padding:0!important;width:auto!important;min-width:0!important}
+.studio-topbar-main .studio-brand:hover{transform:none!important}
+.studio-nav-top{display:flex!important;align-items:center!important;justify-content:center!important;gap:3px!important;min-width:0!important}
+.studio-nav-top .studio-nav-item{display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:auto!important;min-height:40px!important;padding:0 10px!important;border-radius:10px!important;grid-template-columns:none!important;color:#71827c!important;font-size:10px!important;white-space:nowrap!important}
+.studio-nav-top .studio-nav-icon{display:none!important}
+.studio-nav-top .studio-nav-item:hover{background:#eef4f0!important;color:#173b34!important;transform:none!important}
+.studio-nav-top .studio-nav-item.active{background:#e1f1e8!important;color:#173b34!important;box-shadow:none!important}
+.studio-nav-top .studio-nav-item.active:after{content:"";width:4px;height:4px;border-radius:50%;background:#ef9b58;position:absolute;bottom:5px}
+.studio-nav-top .studio-nav-active{display:none!important}
+.studio-topbar-main .studio-top-actions{justify-content:flex-end!important}
+.studio-topbar-main .studio-search{min-width:92px!important;width:auto!important;height:38px!important}
+.studio-topbar-main .studio-search b{font-size:10px!important}
+.studio-topbar-main .studio-theme-top{height:38px!important}
+.app-main{padding:26px 32px 72px!important}
+.app-main>section{max-width:1500px!important}
+.head{margin-bottom:20px!important;align-items:end!important}
+.head-copy{max-width:850px!important}
+.head-copy .kicker{letter-spacing:.2em!important}
+.head-copy h1{font-size:clamp(36px,4vw,58px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+.head-copy p{max-width:700px!important;font-size:14px!important;line-height:1.6!important}
+.page-visual-band{position:relative!important;display:grid!important;grid-template-columns:minmax(0,1fr) 310px!important;min-height:310px!important;margin:0 0 24px!important;overflow:hidden!important;border-radius:28px!important;background:#123d34!important;box-shadow:0 22px 55px rgba(23,59,52,.15)!important}
+.page-visual-photo{position:absolute!important;inset:0!important}
+.page-visual-photo img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
+.page-visual-scrim{position:absolute!important;inset:0!important;background:linear-gradient(90deg,rgba(9,38,32,.94) 0%,rgba(12,50,42,.78) 46%,rgba(12,50,42,.28) 78%,rgba(12,50,42,.1) 100%)!important}
+.page-visual-content{position:relative!important;z-index:2!important;align-self:end!important;max-width:760px!important;padding:34px 34px 32px!important;color:#fff!important}
+.page-visual-label{display:inline-flex!important;padding:7px 10px!important;border:1px solid rgba(255,255,255,.24)!important;border-radius:999px!important;background:rgba(255,255,255,.1)!important;font-size:8px!important;font-weight:800!important;letter-spacing:.17em!important}
+.page-visual-content h2{margin:14px 0 18px!important;max-width:680px!important;font-size:clamp(28px,3.1vw,46px)!important;line-height:1.02!important;letter-spacing:-.04em!important;color:#fff!important}
+.page-visual-meta{display:flex!important;flex-wrap:wrap!important;gap:7px!important}
+.page-visual-meta span{padding:7px 9px!important;border-radius:8px!important;background:rgba(255,255,255,.1)!important;color:#d9eee5!important;font-size:8px!important;font-weight:800!important;letter-spacing:.08em!important}
+.page-visual-art{position:relative!important;z-index:3!important;align-self:end!important;justify-self:end!important;width:290px!important;height:235px!important;margin:0 28px 22px 0!important;padding:12px!important;border-radius:22px!important;background:rgba(255,253,248,.96)!important;box-shadow:0 22px 50px rgba(0,0,0,.25)!important;transform:rotate(1.5deg)!important}
+.page-visual-art img{width:100%!important;height:100%!important;object-fit:contain!important;border-radius:14px!important;background:#f3f5f1!important}
+.page-visual-plan .page-visual-photo img{object-position:center 48%!important}
+.page-visual-practice .page-visual-photo img{object-position:center 38%!important}
+.page-visual-tutor .page-visual-photo img{object-position:center 40%!important}
+.page-visual-review .page-visual-photo img{object-position:center 50%!important}
+.page-visual-progress .page-visual-photo img{object-position:center 45%!important}
+.page-visual-subjects .page-visual-photo img{object-position:center 42%!important}
+.page-visual-focus .page-visual-photo img{object-position:center 42%!important}
+.page-visual-account .page-visual-photo img{object-position:center 45%!important}
+.command,.days,.practicegrid,.tutorgrid,.reviewgrid,.progressgrid,.subjectgrid,.focusgrid{position:relative!important}
+.days,.practicegrid,.tutorgrid,.reviewgrid,.progressgrid,.subjectgrid,.focusgrid{gap:18px!important}
+.card{border:1px solid #dce4de!important;background:rgba(255,253,248,.94)!important;border-radius:20px!important;box-shadow:0 12px 34px rgba(23,59,52,.07)!important}
+.card:hover{box-shadow:0 18px 42px rgba(23,59,52,.1)!important}
+.days .day,.practicecard,.practice-side,.tutorbox,.review-pack,.advice,.progressgrid>.card,.subjectgrid>.card,.focusgrid>.card{overflow:hidden!important}
+.dayhead{background:#f0f5f1!important}
+.practice-subject-grid,.review-pack-grid{gap:14px!important}
+.practice-subject{min-height:110px!important}
+.subjectgrid>.card{min-height:210px!important}
+.progress-topic{padding:14px 0!important}
+.site-footer{max-width:1500px!important;padding:0 32px 28px!important}
+@media(max-width:1180px){
+ .studio-topbar-main{grid-template-columns:175px minmax(0,1fr) auto!important;gap:8px!important;padding:0 16px!important}
+ .studio-nav-top .studio-nav-item{padding:0 7px!important;font-size:9px!important}
+ .page-visual-band{grid-template-columns:minmax(0,1fr) 245px!important}
+ .page-visual-art{width:225px!important;height:190px!important;margin-right:18px!important}
+}
+@media(max-width:900px){
+ .studio-topbar-main{grid-template-columns:165px minmax(0,1fr) auto!important}
+ .studio-nav-top{justify-content:flex-start!important;overflow-x:auto!important;scrollbar-width:none!important}
+ .studio-nav-top::-webkit-scrollbar{display:none!important}
+ .studio-nav-top .studio-nav-item{flex:0 0 auto!important}
+ .studio-topbar-main .studio-search{min-width:42px!important;width:42px!important;padding:0!important;justify-content:center!important}
+ .studio-topbar-main .studio-search b{display:none!important}
+ .page-visual-band{min-height:340px!important;grid-template-columns:1fr!important}
+ .page-visual-art{position:absolute!important;right:18px!important;bottom:18px!important;width:190px!important;height:155px!important;margin:0!important}
+ .page-visual-content{max-width:68%!important;padding:28px!important}
+}
+@media(max-width:760px){
+ .studio-topbar-main{height:62px!important;grid-template-columns:1fr auto!important;padding:0 13px!important}
+ .studio-topbar-main .studio-brand{display:flex!important}
+ .studio-topbar-main .studio-brand b{font-size:15px!important}
+ .studio-nav-top{display:none!important}
+ .studio-topbar-main .studio-top-actions{gap:5px!important}
+ .studio-topbar-main .studio-theme-top{display:none!important}
+ .studio-mobile-context{padding:11px 14px 0!important}
+ .app-main{padding:16px 13px 82px!important}
+ .head-copy h1{font-size:38px!important}
+ .page-visual-band{min-height:390px!important;border-radius:22px!important;margin-bottom:18px!important}
+ .page-visual-content{max-width:100%!important;padding:24px 22px 22px!important;align-self:start!important}
+ .page-visual-content h2{font-size:30px!important;max-width:330px!important}
+ .page-visual-art{width:150px!important;height:125px!important;right:15px!important;bottom:15px!important}
+ .page-visual-scrim{background:linear-gradient(180deg,rgba(9,38,32,.9) 0%,rgba(12,50,42,.65) 45%,rgba(12,50,42,.2) 100%)!important}
+ .site-footer{padding:0 13px 100px!important}
+}
+html[data-theme="dark"] .studio-shell-topnav,
+html[data-theme="dark"] .studio-shell-topnav .studio-stage{background:#091713!important}
+html[data-theme="dark"] .studio-topbar-main{background:rgba(10,28,23,.97)!important;border-bottom-color:#24443a!important}
+html[data-theme="dark"] .studio-nav-top .studio-nav-item{color:#91aea4!important}
+html[data-theme="dark"] .studio-nav-top .studio-nav-item:hover{background:#17372e!important;color:#eaf4ef!important}
+html[data-theme="dark"] .studio-nav-top .studio-nav-item.active{background:#ccebd9!important;color:#12352c!important}
+html[data-theme="dark"] .page-visual-band{box-shadow:0 22px 55px rgba(0,0,0,.25)!important}
+html[data-theme="dark"] .card{background:#10231d!important;border-color:#29463d!important;color:#eaf4ef!important}
+html[data-theme="dark"] .dayhead{background:#17342c!important}

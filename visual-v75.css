@@ -485,3 +485,39 @@ html[data-theme="dark"] .ss-goal-banner{background:linear-gradient(100deg,var(--
   .page-visual-main:after{background:linear-gradient(180deg,rgba(9,34,28,.05),rgba(9,34,28,.9) 86%)!important}
   .hero-action{min-height:360px!important;background-position:60% center!important}
 }
+
+/* V75.2 — full-canvas composition */
+.app-main{width:100%!important;max-width:none!important;margin:0!important;padding:26px 28px 80px!important}
+.app-main>section{width:100%!important;max-width:none!important;margin:0!important}
+.command{width:100%!important;max-width:none!important}
+.today-photo-hero{
+  position:relative;
+  width:100%;
+  min-height:300px;
+  margin:0 0 18px;
+  overflow:hidden;
+  border-radius:28px;
+  background:#12382f;
+  box-shadow:0 24px 65px rgba(15,45,38,.18);
+  isolation:isolate;
+}
+.today-photo-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 48%;z-index:-2;filter:saturate(1.04) contrast(1.02)}
+.today-photo-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(9,34,28,.96) 0%,rgba(12,48,39,.82) 42%,rgba(12,48,39,.35) 72%,rgba(12,48,39,.10) 100%)}
+.today-photo-overlay{max-width:720px;padding:46px 44px 42px;color:#fff}
+.today-photo-overlay .eyebrow{color:#9ce0bb}
+.today-photo-overlay h2{margin:10px 0 10px;font-size:clamp(34px,4vw,60px);line-height:.96;letter-spacing:-.055em;color:#fff}
+.today-photo-overlay p{max-width:600px;margin:0;color:#d6e7e0;font-size:13px;line-height:1.55}
+.today-photo-hero:hover img{transform:scale(1.018)}
+.command-grid{grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr)!important}
+@media(max-width:820px){
+ .app-main{padding:18px 14px 96px!important}
+ .today-photo-hero{min-height:330px;border-radius:22px}
+ .today-photo-overlay{padding:34px 24px}
+ .today-photo-overlay h2{font-size:38px}
+ .command-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:520px){
+ .today-photo-hero{min-height:360px}
+ .today-photo-overlay{padding:28px 20px}
+ .today-photo-overlay h2{font-size:33px}
+}

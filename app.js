@@ -188,61 +188,34 @@ function todayPage(){
   const ready=state.data.subjects.length&&state.data.plan.length;
   if(!ready)return onboardingPage();
   const evidence={mistakes:state.data.mistakes,evidence:state.data.practice.evidence};
-  const tasks=state.data.plan.filter(x=>x.date===today()),
-    next=state.data.plan.filter(x=>!x.done&&x.date>=today()).sort((a,b)=>StudySprintCore.adaptiveScore(b,evidence)-StudySprintCore.adaptiveScore(a,evidence)).slice(0,5),
-    ex=state.data.exams.filter(e=>e&&e.date).map(e=>({...e,days:StudySprintCore.daysUntil(e.date)})).sort((a,b)=>a.days-b.days),
-    signal=learningSignal();
+  const tasks=state.data.plan.filter(x=>x.date===today());
+  const next=state.data.plan.filter(x=>!x.done&&x.date>=today()).sort((a,b)=>StudySprintCore.adaptiveScore(b,evidence)-StudySprintCore.adaptiveScore(a,evidence)).slice(0,4);
+  const ex=state.data.exams.filter(e=>e&&e.date).map(e=>({...e,days:StudySprintCore.daysUntil(e.date)})).sort((a,b)=>a.days-b.days);
+  const signal=learningSignal();
   const todayMinutes=tasks.reduce((a,x)=>a+Number(x.minutes||0),0);
   const completedMinutes=tasks.filter(x=>x.done).reduce((a,x)=>a+Number(x.minutes||0),0);
   const progress=todayMinutes?Math.min(100,Math.round(completedMinutes/todayMinutes*100)):0;
   const remaining=Math.max(0,todayMinutes-completedMinutes);
   const nextTask=tasks.find(x=>!x.done)||next[0];
-  const reason=nextTask?taskReason(nextTask):"You have no unfinished sessions right now.";
+  const reason=nextTask?taskReason(nextTask):"Your planned work is clear. Rebuild it if your schedule changed.";
   const examLabel=nextTask&&nextTask.examDate?(()=>{const d=StudySprintCore.daysUntil(nextTask.examDate);return d<0?Math.abs(d)+"d since exam":d===0?"Exam today":d+"d to exam"})():"No exam date";
-  const packs=(state.data.studyPacks||[]).slice(-4).reverse();
-  const packCard=packs.length?'<div class="today-pack-panel"><div class="section-title"><div><span class="eyebrow">STUDY MATERIAL</span><h2>Keep your packs active</h2></div><button class="text" onclick="view(\'tutor\')">Create another →</button></div>'+packs.map(p=>'<div class="today-pack-item"><div class="today-pack-icon">↗</div><div class="grow"><b>'+esc(p.name)+'</b><small>'+esc(p.subject)+' · '+esc(p.topic)+' · '+(p.lastResult?('last result '+(p.lastResult==="correct"?"correct":"needs work")+' · '):"")+ 'review '+date(p.reviewDate)+'</small></div><button class="btn small" onclick="practiceStudyPack(\''+p.id+'\')">Practice</button></div>').join('')+'</div>':'<div class="today-pack-panel today-pack-empty"><div><span class="eyebrow">STUDY MATERIAL</span><h2>Turn your material into a learning loop.</h2><p>Upload a PDF, image, TXT or Markdown file in Tutor to create a saved Study Pack, then practice it and let the evidence update your plan.</p></div><button class="btn secondary" onclick="view(\'tutor\')">Open Tutor →</button></div>';
-  return '<section class="command">'+    '<div class="today-photo-hero"><img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Student studying at a desk with books and a laptop" loading="eager" width="1800" height="900"><div class="today-photo-overlay"><span class="eyebrow">TODAY · YOUR COMMAND CENTER</span><h2>Know what to study. Know why. Know what comes next.</h2><p>StudySprint turns your plan, practice evidence and weak topics into the next useful action.</p></div></div>'+
-    '<div class="ss-greeting"><div><span class="kicker">TODAY</span><h1>'+greetingLabel()+', <em>StudySprint</em>! 👋</h1><p>Keep going — your learning system is ready for the next useful move.</p></div><button class="btn secondary" onclick="openSetup()">Edit plan</button></div>'+
-    '<div class="ss-goal-banner"><div class="ss-goal-icon">◉</div><div><span>Today\'s Goal</span><b>'+esc(nextTask?("Master "+nextTask.topic):"Build your first study goal")+'</b><small>'+esc(nextTask?("You\'re on track for your plan."):("Set your subjects and exams to unlock your adaptive plan."))+'</small></div><button class="btn primary" onclick="'+(nextTask?("startTask(\'"+nextTask.id+"\',\'"+nextTask.date+"\')"):"openSetup()")+'">View Plan <span>→</span></button></div>'+
-    '<div class="command-grid">'+
-      '<div class="hero-action">'+
-        '<div class="hero-top"><span class="eyebrow">RECOMMENDED NEXT</span><span class="live-dot">LIVE</span></div>'+
-        (nextTask?
-          '<div class="hero-subject">'+esc(nextTask.subject)+'</div><h2>'+esc(nextTask.topic)+'</h2><p>'+esc(reason)+'</p>'+
-          '<div class="hero-meta"><span>'+nextTask.minutes+' min</span><span>'+esc(examLabel)+'</span><span>'+esc(nextTask.done?"Complete":"Unfinished")+'</span></div>'+
-          '<div class="hero-actions"><button class="btn primary" onclick="startTask(\''+nextTask.id+'\',\''+nextTask.date+'\')">Start this session <span>→</span></button><button class="btn textbtn" onclick="view(\'practice\')">Practice instead</button></div>'
-        :
-          '<div class="hero-subject">ALL CAUGHT UP</div><h2>Your plan is clear.</h2><p>Rebuild your schedule if your available time or exam dates changed.</p><div class="hero-actions"><button class="btn primary" onclick="regen()">Rebuild my plan <span>→</span></button></div>')+
+  return '<section class="today-simple">'+
+    '<div class="today-photo-hero today-photo-hero-simple"><img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Student studying at a desk with books and a laptop" loading="eager" width="1800" height="900"><div class="today-photo-overlay"><span class="eyebrow">TODAY · YOUR COMMAND CENTER</span><h2>Know what to do next.</h2><p>One clear recommendation, useful evidence, and a simple path forward.</p></div></div>'+
+    '<div class="today-simple-intro"><div><span class="kicker">TODAY</span><h1>'+greetingLabel()+', <em>StudySprint</em>.</h1><p>Here is the next useful move — no clutter.</p></div><button class="btn secondary" onclick="openSetup()">Edit plan</button></div>'+
+    '<div class="today-next-layout">'+
+      '<div class="today-next-card"><div class="hero-top"><span class="eyebrow">YOUR NEXT MOVE</span><span class="live-dot">ADAPTIVE</span></div>'+
+        (nextTask?'<div class="hero-subject">'+esc(nextTask.subject)+'</div><h2>'+esc(nextTask.topic)+'</h2><p>'+esc(reason)+'</p><div class="hero-meta"><span>'+nextTask.minutes+' min</span><span>'+esc(examLabel)+'</span></div><button class="btn primary" onclick="startTask(\''+nextTask.id+'\',\''+nextTask.date+'\')">Start session <span>→</span></button>'
+        :'<div class="hero-subject">ALL CAUGHT UP</div><h2>Your plan is clear.</h2><p>Rebuild your schedule when your available time or exam dates change.</p><button class="btn primary" onclick="regen()">Rebuild plan <span>→</span></button>')+
       '</div>'+
-      '<aside class="signal-panel">'+
-        '<div class="signal-head"><span class="eyebrow">LEARNING SIGNAL</span><span>'+signal.accuracy+'%</span></div>'+
-        '<div class="signal-number">'+(signal.topics.length?signal.accuracy+"%":"—")+'</div>'+
-        '<p>'+ (signal.attempts?signal.correct+" correct from "+signal.attempts+" practice attempts.":"Practice creates the evidence StudySprint uses to adapt your plan.")+'</p>'+
-        '<div class="signal-row"><span>Weak topics</span><b>'+signal.topics.filter(t=>Number(t.confidence||3)<=2).length+'</b></div>'+
-        '<div class="signal-row"><span>Reviews due</span><b>'+signal.dueReviews+'</b></div>'+
-        '<div class="signal-row"><span>Mistakes saved</span><b>'+signal.mistakes+'</b></div>'+
-        '<div class="signal-row"><span>Today left</span><b>'+remaining+'m</b></div>'+
-      '</aside>'+
+      '<aside class="today-signal-card"><div class="signal-head"><span class="eyebrow">LEARNING SIGNAL</span><span>'+signal.accuracy+'%</span></div><div class="signal-number">'+(signal.topics.length?signal.accuracy:"—")+'<small>% accuracy</small></div><p>'+(signal.attempts?signal.correct+" correct from "+signal.attempts+" attempts.":"Practice creates the evidence that adapts your plan.")+'</p><div class="signal-mini-grid"><span><b>'+signal.dueReviews+'</b><small>Reviews due</small></span><span><b>'+signal.mistakes+'</b><small>Mistakes</small></span><span><b>'+remaining+'m</b><small>Today left</small></span></div></aside>'+
     '</div>'+
-    '<div class="command-strip">'+
-      '<div><span>DAY PROGRESS</span><b>'+progress+'%</b><i><em style="width:'+progress+'%"></em></i></div>'+
-      '<div><span>NEXT EXAM</span><b>'+(ex[0]?(ex[0].days<0?Math.abs(ex[0].days)+"d ago":ex[0].days===0?"Today":ex[0].days+"d"):"—")+'</b><small>'+(ex[0]?esc(ex[0].name):"Add an exam date")+'</small></div>'+
-      '<div><span>FOCUS TIME</span><b>'+Number(state.data.focus.minutes||0)+'m</b><small>'+Number(state.data.focus.sessions||0)+' sessions</small></div>'+
-      '<div><span>WEAK TOPIC</span><b>'+(signal.weak?esc(signal.weak.name):"None flagged")+'</b><small>'+(signal.weak?"Needs another retrieval":"Keep building evidence")+'</small></div>'+
-    '</div>'+
-    '<div class="today-visual-story"><div class="today-visual-copy"><span class="eyebrow">THE STUDYSPRINT METHOD</span><h2>Turn a study session into <em>evidence.</em></h2><p>Plan the move, do the work, prove what you know, then let the system decide what deserves attention next.</p><div class="today-visual-steps"><span><b>01</b>Plan</span><span><b>02</b>Practice</span><span><b>03</b>Adapt</span></div></div><div class="today-visual-art"><img src="./assets/today-progress.svg" alt="Study progress dashboard with a focus timer, notebook and progress chart" loading="lazy" width="900" height="650"><div class="today-visual-badge"><i></i><span>LEARNING SIGNAL</span><b>Updating after practice</b></div></div></div>'+
-    pageQuote("Make the next session clear enough to start.")+'<div class="today-lower">'+
-      '<div class="timeline-panel"><div class="section-title"><div><span class="eyebrow">TODAY</span><h2>Your study queue</h2></div><button class="text" onclick="view(\'plan\')">View full plan →</button></div>'+
-      (tasks.map(task).join("")||'<div class="empty">No sessions scheduled today. <button class="text" onclick="regen()">Rebuild the plan →</button></div>')+
-      '</div>'+
-      '<div class="next-panel"><div class="section-title"><div><span class="eyebrow">UP NEXT</span><h2>Keep moving</h2></div></div>'+
-      (next.map(x=>'<button class="next-item" onclick="startTask(\''+x.id+'\',\''+x.date+'\')"><span class="next-index">→</span><span><b>'+esc(x.topic)+'</b><small>'+esc(x.subject)+' · '+date(x.date)+' · '+x.minutes+'m</small></span></button>').join("")||'<div class="empty">Nothing waiting.</div>')+
-      '</div>'+
-    '</div>'+
-    '<div class="ss-quick-actions"><div class="ss-section-label"><span class="quick-pulse"></span> Quick Actions</div><button onclick="view(\'practice\')"><b>ϟ</b><span>Practice Questions</span></button><button onclick="view(\'tutor\')"><b>✦</b><span>Get AI Tutor</span></button><button onclick="view(\'review\')"><b>↻</b><span>Review Mistakes</span></button><button onclick="view(\'progress\')"><b>▥</b><span>View Progress</span></button></div>'+packCard+
-  '</section>'+pageQuote("Turn weak topics into the next useful action.");
-
+    '<div class="today-metrics"><div><span>DAY PROGRESS</span><b>'+progress+'%</b><i><em style="width:'+progress+'%"></em></i></div><div><span>NEXT EXAM</span><b>'+(ex[0]?(ex[0].days<0?Math.abs(ex[0].days)+"d ago":ex[0].days===0?"Today":ex[0].days+"d"):"—")+'</b><small>'+(ex[0]?esc(ex[0].name):"Add an exam date")+'</small></div><div><span>FOCUS</span><b>'+Number(state.data.focus.minutes||0)+'m</b><small>'+Number(state.data.focus.sessions||0)+' sessions</small></div><div><span>WEAK TOPIC</span><b>'+(signal.weak?esc(signal.weak.name):"None")+'</b><small>'+(signal.weak?"Needs retrieval":"Keep building evidence")+'</small></div></div>'+
+    '<div class="today-queue card"><div class="section-title"><div><span class="eyebrow">TODAY'S QUEUE</span><h2>Keep it simple.</h2></div><button class="text" onclick="view(\'plan\')">Full plan →</button></div>'+(tasks.map(task).join("")||'<div class="empty">Nothing scheduled today. <button class="text" onclick="regen()">Build the plan →</button></div>')+'</div>'+
+    '<div class="today-next-list card"><div class="section-title"><div><span class="eyebrow">UP NEXT</span><h2>What comes after</h2></div></div>'+(next.map(x=>'<button class="next-item" onclick="startTask(\''+x.id+'\',\''+x.date+'\')"><span class="next-index">→</span><span><b>'+esc(x.topic)+'</b><small>'+esc(x.subject)+' · '+date(x.date)+' · '+x.minutes+'m</small></span></button>').join("")||'<div class="empty">Nothing waiting.</div>')+'</div>'+
+    '<div class="today-simple-actions"><button onclick="view(\'practice\')"><b>Practice</b><span>Prove what you know</span></button><button onclick="view(\'tutor\')"><b>AI Tutor</b><span>Understand a hard idea</span></button><button onclick="view(\'review\')"><b>Review</b><span>Return to weak spots</span></button></div>'+
+  '</section>';
 }
+
 function task(x){const examDays=typeof StudySprintCore!=="undefined"&&x.examDate?StudySprintCore.daysUntil(x.examDate):null;const examLabel=examDays===null?"exam date not set":examDays<0?Math.abs(examDays)+"d since exam":examDays===0?"exam today":examDays===1?"exam tomorrow":examDays+"d to exam";return `<div class="task ${x.done?"done":""}"><button class="check" onclick="toggle('${x.id}','${x.date}')" aria-label="${x.done?"Mark incomplete":"Mark complete"}">${x.done?"✓":""}</button><div class="grow"><small>${esc(x.subject)}</small><b>${esc(x.topic)}</b><span>${x.minutes} min · ${examLabel}</span></div><button class="btn small" onclick="startTask('${x.id}','${x.date}')">${x.done?"Review":"Start"}</button></div>`}
 function accountPage(){
  const a=state.data.account&&typeof state.data.account==="object"?state.data.account:{};

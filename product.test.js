@@ -100,7 +100,7 @@ assert.match(app,/applyTheme\(currentTheme\(\)/);
 assert.match(app,/function openTutorSearch\(\)/);
 assert.match(app,/function showNotifications\(\)/);
 assert.match(app,/today-simple/);
-assert.match(app,/ss-quick-actions/);
+assert.match(app,/today-simple-actions/);
 
 console.log("StudySprint product integration tests: PASS");
 console.log("StudySprint visual integration tests: PASS");

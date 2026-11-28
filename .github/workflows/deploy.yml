@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: Check JavaScript
         run: |
           node --check app.js
@@ -50,6 +50,7 @@ jobs:
           test -f visual-v78.css
           test -f visual-v79.css
           test -f visual-v80.css
+          test -f visual-v100.css
           test -f marketing-v75.css
           test -f assets/adaptive-learning-system.svg
           test -f assets/study-hero.svg
@@ -70,7 +71,8 @@ jobs:
           grep -q "visual-v78.css?v=78" index.html
           grep -q "visual-v79.css?v=79" index.html
           grep -q "visual-v80.css?v=80" index.html
-          grep -q "studysprint-shell-v107-v80" sw.js
+          grep -q "visual-v100.css?v=100" index.html
+          grep -q "studysprint-shell-v108-v100" sw.js
 
   deploy:
     needs: validate
@@ -80,7 +82,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload site

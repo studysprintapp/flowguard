@@ -83,14 +83,14 @@ function shell(c){
 function pageHint(title,text,action=""){return '<div class="pagehint"><b>'+esc(title)+'</b><span>'+esc(text)+'</span>'+(action||'')+'</div>'}
 function pageVisual(k){
   const map={
-    PLAN:["https://images.pexels.com/photos/17668838/pexels-photo-17668838.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/plan-visual.svg","A student planning a study schedule with notes and a laptop","Build the week around the work that matters."],
-    PRACTICE:["https://images.pexels.com/photos/6929275/pexels-photo-6929275.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/practice-visual.svg","A focused student working through handwritten study notes","Answer first. Turn the result into evidence."],
-    TUTOR:["https://images.pexels.com/photos/9159068/pexels-photo-9159068.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/tutor-visual.svg","A student getting focused academic guidance","Ask, understand, then prove it yourself."],
-    REVIEW:["https://images.pexels.com/photos/6549856/pexels-photo-6549856.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/review-visual.svg","A study workspace prepared for reviewing notes and mistakes","Return to the things that still need retrieval."],
-    PROGRESS:["https://images.pexels.com/photos/9572709/pexels-photo-9572709.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/progress-visual.svg","A deep study workspace with books and learning materials","See evidence of learning, not just hours."],
-    SUBJECTS:["https://images.pexels.com/photos/8199257/pexels-photo-8199257.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/subjects-visual.svg","A student studying in a library with a laptop","See the whole learning map at a glance."],
-    FOCUS:["https://images.pexels.com/photos/8199770/pexels-photo-8199770.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/focus-visual.svg","Students working together in a bright study space","Protect the minutes that move learning forward."],
-    ACCOUNT:["https://images.pexels.com/photos/5306450/pexels-photo-5306450.jpeg?auto=compress&cs=tinysrgb&w=1800","./assets/account-visual.svg","Students collaborating around a laptop and notebooks","Keep your learning system organised and yours."]
+    PLAN:["./assets/plan-visual.svg","./assets/plan-visual.svg","A student planning a study schedule with notes and a laptop","Build the week around the work that matters."],
+    PRACTICE:["./assets/practice-visual.svg","./assets/practice-visual.svg","A focused student working through handwritten study notes","Answer first. Turn the result into evidence."],
+    TUTOR:["./assets/tutor-visual.svg","./assets/tutor-visual.svg","A student getting focused academic guidance","Ask, understand, then prove it yourself."],
+    REVIEW:["./assets/review-visual.svg","./assets/review-visual.svg","A study workspace prepared for reviewing notes and mistakes","Return to the things that still need retrieval."],
+    PROGRESS:["./assets/progress-visual.svg","./assets/progress-visual.svg","A deep study workspace with books and learning materials","See evidence of learning, not just hours."],
+    SUBJECTS:["./assets/subjects-visual.svg","./assets/subjects-visual.svg","A student studying in a library with a laptop","See the whole learning map at a glance."],
+    FOCUS:["./assets/focus-visual.svg","./assets/focus-visual.svg","Students working together in a bright study space","Protect the minutes that move learning forward."],
+    ACCOUNT:["./assets/account-visual.svg","./assets/account-visual.svg","Students collaborating around a laptop and notebooks","Keep your learning system organised and yours."]
   };
   const v=map[String(k).toUpperCase()];
   if(!v)return "";
@@ -200,7 +200,7 @@ function todayPage(){
   const reason=nextTask?taskReason(nextTask):"Your planned work is clear. Rebuild it if your schedule changed.";
   const examLabel=nextTask&&nextTask.examDate?(()=>{const d=StudySprintCore.daysUntil(nextTask.examDate);return d<0?Math.abs(d)+"d since exam":d===0?"Exam today":d+"d to exam"})():"No exam date";
   return '<section class="today-simple">'+
-    '<div class="today-photo-hero today-photo-hero-simple"><img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Student studying at a desk with books and a laptop" loading="eager" width="1800" height="900"><div class="today-photo-overlay"><span class="eyebrow">TODAY · YOUR COMMAND CENTER</span><h2>Know what to do next.</h2><p>One clear recommendation, useful evidence, and a simple path forward.</p></div></div>'+
+    '<div class="today-photo-hero today-photo-hero-simple"><img src="./assets/today-progress.svg" alt="Student studying at a desk with books and a laptop" loading="eager" width="1800" height="900"><div class="today-photo-overlay"><span class="eyebrow">TODAY · YOUR COMMAND CENTER</span><h2>Know what to do next.</h2><p>One clear recommendation, useful evidence, and a simple path forward.</p></div></div>'+
     '<div class="today-simple-intro"><div><span class="kicker">TODAY</span><h1>'+greetingLabel()+', <em>StudySprint</em>.</h1><p>Here is the next useful move — no clutter.</p></div><button class="btn secondary" onclick="openSetup()">Edit plan</button></div>'+
     '<div class="today-next-layout">'+
       '<div class="today-next-card"><div class="hero-top"><span class="eyebrow">YOUR NEXT MOVE</span><span class="live-dot">ADAPTIVE</span></div>'+
